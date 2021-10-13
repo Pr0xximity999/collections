@@ -30,6 +30,29 @@ def makeMNmBagDict(mnmQuan:int = 1):
             bag["bruin"] += 1
     return bag
 
+def sortBag(collection:type):
+    if type(collection) == list:
+        sortlist = list()
+        for i in collection:
+            if i == "oranje":
+                sortlist.append(i)
+        for i in collection:
+            if i == "blauw":
+                sortlist.append(i)
+        for i in collection:
+            if i == "groen":
+                sortlist.append(i)
+        for i in collection:
+            if i == "bruin":
+                sortlist.append(i)
+        return sortlist
+    elif type(collection) == dict:
+        return collection
+
+
+
+    return collection 
+
 
 def start():
     quantity = str(input("Hoeveel M&M's wil je? >>"))
@@ -38,9 +61,16 @@ def start():
         if quantity[i] in alphabet: print("Voer geen nummer in alstublieft"); start()
     if float(quantity) % 1 != 0: print("Voer een heel getal in"); start()
     else: quantity = int(quantity)
+    listType(quantity)
 
-    bag = makeMNmBagDict(quantity)
-    for i in bag:
-        print(f"{bag[i]} M&M's zijn {i} in deze zak")
+def listType(quantity):
+    colType = input("Wil je de lijst zien als een list of dict? L/D >>")
+
+    if colType.lower() == "d": bag = makeMNmBagDict(quantity)
+    elif colType.lower() == "l": bag = makeMnmBagList(quantity)
+    bag = sortBag(bag)
+
+    print(bag)
+
 start()
 input()
